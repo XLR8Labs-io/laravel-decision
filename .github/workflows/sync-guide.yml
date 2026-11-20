@@ -1,12 +1,19 @@
-name: Sync downloadable guide
+name: Sync & release guide
 
 # Keeps LARAVEL-STACK-GUIDE.md identical to README.md (plus a source header),
 # so people can drop it into their own projects without overwriting their README.
+# Run manually with "release" ticked to publish it as a GitHub release asset,
+# versioned by the README's "Last verified <Mon D, YYYY>" date.
 on:
   push:
     branches: [main]
     paths: [README.md]
   workflow_dispatch:
+    inputs:
+      release:
+        description: "Publish a GitHub release with the guide attached (version = README's last-verified date)"
+        type: boolean
+        default: true
 
 permissions:
   contents: write
@@ -24,7 +31,7 @@ jobs:
           {
             echo "<!-- Laravel Frontends & Starter Kits — Decision Guide · CC BY 4.0"
             echo "     Source and latest version: https://github.com/${GITHUB_REPOSITORY}"
-            echo "     Update: curl -o LARAVEL-STACK-GUIDE.md https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/main/LARAVEL-STACK-GUIDE.md -->"
+            echo "     Update: curl -fLo LARAVEL-STACK-GUIDE.md https://github.com/${GITHUB_REPOSITORY}/releases/latest/download/LARAVEL-STACK-GUIDE.md -->"
             echo
             cat README.md
           } > LARAVEL-STACK-GUIDE.md
@@ -40,3 +47,37 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git commit -m "Sync LARAVEL-STACK-GUIDE.md from README.md"
           git push
+
+      - name: Publish release
+        if: github.event_name == 'workflow_dispatch' && inputs.release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          verified=$(grep -oP 'Last verified \K[A-Z][a-z]{2} [0-9]{1,2}, [0-9]{4}' README.md | head -1)
+          if [ -z "$verified" ]; then
+            echo "::error::README.md has no 'Last verified <Mon D, YYYY>' line"
+            exit 1
+          fi
+          tag="v$(date -u -d "$verified" +%Y.%m.%d)"
+
+          if gh release view "$tag" >/dev/null 2>&1; then
+            gh release upload "$tag" LARAVEL-STACK-GUIDE.md --clobber
+            echo "Replaced the guide on existing release $tag"
+            exit 0
+          fi
+
+          gh release create "$tag" LARAVEL-STACK-GUIDE.md \
+            --target "$(git rev-parse HEAD)" \
+            --title "Guide verified $verified" \
+            --notes-file - <<EOF
+          The decision guide as verified on **$verified**.
+
+          **Download** \`LARAVEL-STACK-GUIDE.md\` below and drop it into your project, or run this from your project root:
+
+          \`\`\`bash
+          curl -fLo LARAVEL-STACK-GUIDE.md https://github.com/${GITHUB_REPOSITORY}/releases/latest/download/LARAVEL-STACK-GUIDE.md
+          \`\`\`
+
+          What changed: see [Recent changes](https://github.com/${GITHUB_REPOSITORY}#recent-changes-20252026).
+          EOF

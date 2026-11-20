@@ -43,4 +43,5 @@ jobs:
           - [ ] Handle open [`outdated` issues](https://github.com/XLR8Labs-io/laravel-decision/issues?q=is%3Aissue+is%3Aopen+label%3Aoutdated)
           - [ ] Add rows to **Recent changes** and links to **Sources**
           - [ ] Bump the "last verified" badge, footer and Caveats date
+          - [ ] Publish a release: Actions → **Sync & release guide** → Run workflow (release ✓)
           EOF
