@@ -1,0 +1,42 @@
+name: Sync downloadable guide
+
+# Keeps LARAVEL-STACK-GUIDE.md identical to README.md (plus a source header),
+# so people can drop it into their own projects without overwriting their README.
+on:
+  push:
+    branches: [main]
+    paths: [README.md]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency: sync-guide
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Build LARAVEL-STACK-GUIDE.md from README.md
+        run: |
+          {
+            echo "<!-- Laravel Frontends & Starter Kits — Decision Guide · CC BY 4.0"
+            echo "     Source and latest version: https://github.com/${GITHUB_REPOSITORY}"
+            echo "     Update: curl -o LARAVEL-STACK-GUIDE.md https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/main/LARAVEL-STACK-GUIDE.md -->"
+            echo
+            cat README.md
+          } > LARAVEL-STACK-GUIDE.md
+
+      - name: Commit if changed
+        run: |
+          git add LARAVEL-STACK-GUIDE.md
+          if git diff --cached --quiet; then
+            echo "Already in sync."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Sync LARAVEL-STACK-GUIDE.md from README.md"
+          git push

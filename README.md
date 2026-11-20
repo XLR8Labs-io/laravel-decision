@@ -11,7 +11,7 @@
 ![Tailwind CSS 4](https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?logo=tailwindcss&logoColor=white)
 ![Vite+](https://img.shields.io/badge/Vite%2B-build-646CFF?logo=vite&logoColor=white)
 ![Last verified](https://img.shields.io/badge/last_verified-Nov_20%2C_2026-2ea44f)
-[![License: CC BY 4.0](https://img.shields.io/badge/license-CC_BY_4.0-lightgrey)](LICENSE)
+[![License: CC BY 4.0](https://img.shields.io/badge/license-CC_BY_4.0-lightgrey)](https://github.com/XLR8Labs-io/laravel-decision/blob/main/LICENSE)
 
 [![Report outdated info](https://img.shields.io/badge/Spotted_a_new_release%3F-Report_outdated_info-D93F0B?style=for-the-badge)](https://github.com/XLR8Labs-io/laravel-decision/issues/new?template=outdated-info.yml)
 
@@ -28,6 +28,22 @@
 
 > [!TIP]
 > You can give this README to your AI assistant as context: it then knows which stack you chose and why, and which outdated patterns to avoid.
+
+### Use it in your own project
+
+Download the guide as **`LARAVEL-STACK-GUIDE.md`**. It's the same content as this README, under a name that won't overwrite yours. Run this from your project root, or [download the file](https://github.com/XLR8Labs-io/laravel-decision/blob/main/LARAVEL-STACK-GUIDE.md) and use the download button:
+
+```bash
+curl -o LARAVEL-STACK-GUIDE.md https://raw.githubusercontent.com/XLR8Labs-io/laravel-decision/main/LARAVEL-STACK-GUIDE.md
+```
+
+Then point your AI agent at it. Add a line like this to `CLAUDE.md`, `AGENTS.md`, `.cursorrules` or your agent's rules file:
+
+```text
+Before choosing a Laravel stack or writing Laravel code, read LARAVEL-STACK-GUIDE.md and follow its versions and "Building with AI" rules.
+```
+
+Run the same `curl` command again to update to the latest version.
 
 > [!IMPORTANT]
 > **Laravel moves fast.** If you spot a release, price or installer change that isn't here yet, please **[open an "Outdated info" issue](https://github.com/XLR8Labs-io/laravel-decision/issues/new?template=outdated-info.yml)**. One line and a source link is enough, and the maintainer gets notified.
@@ -484,7 +500,7 @@ Pull requests are welcome too:
 
 ## License
 
-This guide is licensed under [CC BY 4.0](LICENSE). You may share and adapt it, including commercially, as long as you give credit and link back to this repo.
+This guide is licensed under [CC BY 4.0](https://github.com/XLR8Labs-io/laravel-decision/blob/main/LICENSE). You may share and adapt it, including commercially, as long as you give credit and link back to this repo.
 
 ---
 

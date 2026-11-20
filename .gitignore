@@ -3,5 +3,6 @@
 !.gitignore
 !README.md
 !LICENSE
+!LARAVEL-STACK-GUIDE.md
 !.github/
 !.github/**
