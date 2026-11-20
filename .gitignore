@@ -1,0 +1,4 @@
+# Publish only the README; everything else stays local.
+*
+!.gitignore
+!README.md
