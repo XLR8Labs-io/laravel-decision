@@ -1,0 +1,46 @@
+name: Quarterly freshness check
+
+on:
+  schedule:
+    - cron: "0 9 1 1,4,7,10 *" # 09:00 UTC on Jan 1, Apr 1, Jul 1, Oct 1
+  workflow_dispatch:
+
+permissions:
+  issues: write
+
+jobs:
+  open-review-issue:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Open review issue (skip if one is still open)
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          open=$(gh issue list --label review --state open --json number --jq length)
+          if [ "$open" != "0" ]; then
+            echo "A review issue is already open; skipping."
+            exit 0
+          fi
+          gh issue create \
+            --title "Quarterly freshness check — $(date -u +'%B %Y')" \
+            --label review \
+            --assignee buildwithmeraj \
+            --body-file - <<'EOF'
+          Time to check the guide against the latest releases. Tick each item, update the README, then close this issue.
+
+          **Releases**
+          - [ ] Laravel / installer: [release notes](https://laravel.com/docs/master/releases) · [laravel/installer releases](https://github.com/laravel/installer/releases) · [starter kits docs](https://laravel.com/framework/docs/starter-kits)
+          - [ ] Livewire: [releases](https://github.com/livewire/livewire/releases)
+          - [ ] Inertia: [releases](https://github.com/inertiajs/inertia/releases)
+          - [ ] Filament: [releases](https://github.com/filamentphp/filament/releases)
+          - [ ] News sweep: [Laravel News](https://laravel-news.com)
+
+          **Prices**
+          - [ ] [Flux Pro](https://fluxui.dev/pricing) · [Nova](https://nova.laravel.com) · [WorkOS](https://workos.com/pricing) · [Laravel Cloud](https://laravel.com/cloud/pricing)
+
+          **Wrap up**
+          - [ ] Handle open [`outdated` issues](https://github.com/XLR8Labs-io/laravel-decision/issues?q=is%3Aissue+is%3Aopen+label%3Aoutdated)
+          - [ ] Add rows to **Recent changes** and links to **Sources**
+          - [ ] Bump the "last verified" badge, footer and Caveats date
+          EOF

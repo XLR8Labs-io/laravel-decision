@@ -1,0 +1,43 @@
+name: Outdated info
+description: A new release, version, price or installer change that the guide doesn't reflect yet.
+title: "[Outdated]: "
+labels: ["outdated"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping keep this guide current! A one-line report with a source link is enough. The maintainer is notified and will update the README.
+  - type: input
+    id: what
+    attributes:
+      label: What changed?
+      placeholder: "e.g. Livewire 5 released, installer adds a new prompt, Flux Pro price changed"
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Source link
+      description: Official docs, release notes, GitHub release or pricing page preferred.
+      placeholder: https://
+    validations:
+      required: true
+  - type: dropdown
+    id: section
+    attributes:
+      label: Which part of the guide is affected?
+      multiple: true
+      options:
+        - Quick pick / decision matrix
+        - Frontend approaches
+        - Official starter kits
+        - Add-ons and pricing
+        - Installation cheat sheet
+        - Building with AI
+        - Recent changes
+        - Not sure
+  - type: textarea
+    id: details
+    attributes:
+      label: Details (optional)
+      description: What the guide says now and what it should say.

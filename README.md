@@ -11,6 +11,9 @@
 ![Tailwind CSS 4](https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?logo=tailwindcss&logoColor=white)
 ![Vite+](https://img.shields.io/badge/Vite%2B-build-646CFF?logo=vite&logoColor=white)
 ![Last verified](https://img.shields.io/badge/last_verified-Nov_20%2C_2026-2ea44f)
+[![License: CC BY 4.0](https://img.shields.io/badge/license-CC_BY_4.0-lightgrey)](LICENSE)
+
+[![Report outdated info](https://img.shields.io/badge/Spotted_a_new_release%3F-Report_outdated_info-D93F0B?style=for-the-badge)](https://github.com/XLR8Labs-io/laravel-decision/issues/new?template=outdated-info.yml)
 
 </div>
 
@@ -26,6 +29,9 @@
 > [!TIP]
 > You can give this README to your AI assistant as context: it then knows which stack you chose and why, and which outdated patterns to avoid.
 
+> [!IMPORTANT]
+> **Laravel moves fast.** If you spot a release, price or installer change that isn't here yet, please **[open an "Outdated info" issue](https://github.com/XLR8Labs-io/laravel-decision/issues/new?template=outdated-info.yml)**. One line and a source link is enough, and the maintainer gets notified.
+
 ## Contents
 
 - [Quick pick](#quick-pick)
@@ -40,6 +46,7 @@
 - [Recent changes (2025–2026)](#recent-changes-20252026)
 - [Sources](#sources)
 - [Contributing](#contributing)
+- [License](#license)
 
 ---
 
@@ -467,11 +474,17 @@ Versions and installer prompts change often; re-check this log before relying on
 
 ## Contributing
 
-Laravel moves fast. If a version, price, flag or installer prompt here is out of date, please open an issue or a pull request:
+Found something out of date? **[Open an "Outdated info" issue](https://github.com/XLR8Labs-io/laravel-decision/issues/new?template=outdated-info.yml)**. That's the fastest way to get the guide updated. The guide is also checked against new releases every quarter.
+
+Pull requests are welcome too:
 
 1. Link a **primary source**: official docs, the GitHub repo or the pricing page.
 2. Update **every place** the fact appears. Install flags, version numbers and prices each repeat across sections.
 3. Add a dated row to [Recent changes](#recent-changes-20252026).
+
+## License
+
+This guide is licensed under [CC BY 4.0](LICENSE). You may share and adapt it, including commercially, as long as you give credit and link back to this repo.
 
 ---
 
