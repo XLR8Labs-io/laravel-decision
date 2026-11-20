@@ -506,5 +506,5 @@ This guide is licensed under [CC BY 4.0](https://github.com/XLR8Labs-io/laravel-
 ---
 
 <div align="center">
-<sub>Research compiled by Adil · Last verified Nov 20, 2026</sub>
+<sub>Research compiled by Merajul Islam · Last verified Nov 20, 2026</sub>
 </div>
